@@ -38,6 +38,7 @@ const Quiz = ({ quizData, reset }) => {
             {currentQuestion >= quizData.length &&
                 <button onClick={reset}>Replay</button>
             }
+            <button>Restart (material ui alert here...)</button>
         </>
     );
 }
