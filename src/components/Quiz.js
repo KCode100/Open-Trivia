@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import LinearProgress from '@mui/material/LinearProgress';
 
 const Quiz = ({ quizData, reset }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0)
     const [score, setScore] = useState(0)
+    const percentage = currentQuestion / quizData.length * 100
 
     // handle answer btns
     const answerHandler = (choice) => {
@@ -18,6 +19,7 @@ const Quiz = ({ quizData, reset }) => {
 
     return (
         <>
+            <LinearProgress variant="determinate" value={percentage} />
             {currentQuestion < quizData.length &&
                 <div>
                     <h2>{quizData[currentQuestion].category}</h2>
@@ -37,7 +39,6 @@ const Quiz = ({ quizData, reset }) => {
                 <button onClick={reset}>Replay</button>
             }
         </>
-
     );
 }
 

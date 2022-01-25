@@ -1,16 +1,28 @@
 import { useEffect, useState } from "react";
 import { categories } from "../data/categories";
+import Quiz from "./Quiz";
+
+// material ui
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import Quiz from "./Quiz";
+import Alert from '@mui/material/Alert';
+import TextField from '@mui/material/TextField';
+import { CardContent, Container, Stack } from "@mui/material";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
 
 const Form = () => {
     const [numberOfQuestions, setNumberOfQuestions] = useState(null)
-    const [category, setCategory] = useState(null)
-    const [difficulty, setDifficulty] = useState(null)
-    const [quizType, setQuizType] = useState(null)
+    const [category, setCategory] = useState("")
+    const [difficulty, setDifficulty] = useState("")
+    const [quizType, setQuizType] = useState("")
     const [error, setError] = useState(null)
-    const [formSubmitted, setFormSubmitted] = useState(null)
+    const [formSubmitted, setFormSubmitted] = useState(false)
     const [loading, setLoading] = useState(false)
     const [quizData, setQuizData] = useState(null)
 
@@ -19,9 +31,6 @@ const Form = () => {
         e.preventDefault()
         const form = e.target;
         setNumberOfQuestions(form.number.value)
-        setCategory(form.category.value)
-        setDifficulty(form.difficulty.value)
-        setQuizType(form.type.value)
         setFormSubmitted(true)
     }
 
@@ -35,17 +44,8 @@ const Form = () => {
                     const data = await fetch(`https://opentdb.com/api.php?category=${category}&amount=${numberOfQuestions}&difficulty=${difficulty}&type=${quizType}&token=${token.token}`)
                     const json = await data.json()
                     setLoading(false)
-                    if (json.response_code === 1) {
-                        setError("The API doesn't have enough questions for your query. (Ex. Asking for 50 Questions in a Category that only has 20.")
-                    }
-                    if (json.response_code === 2) {
-                        throw new Error("Code 2: Invalid Parameter Contains an invalid parameter. Arguements passed in aren't valid. (Ex. Amount = Five)")
-                    }
-                    if (json.response_code === 3) {
-                        throw new Error("Code 3: Token Not Found Session Token does not exist.")
-                    }
-                    if (json.response_code === 4) {
-                        throw new Error("Code 4: Token Empty Session Token has returned all possible questions for the specified query. Resetting the Token is necessary.")
+                    if (json.response_code !== 0) {
+                        throw new Error("Invalid parameter or session token")
                     }
                     // combine correct and incorrect answers and shuffle
                     json.results.forEach(question => {
@@ -53,7 +53,7 @@ const Form = () => {
                         question.choices = combined.sort(() => Math.random() - 0.5)
                     })
                     setQuizData(json.results)
-                    console.log(json.results)
+                    console.log(json)
                 } catch (err) {
                     setLoading(false)
                     setError("Error, please try again later")
@@ -69,51 +69,98 @@ const Form = () => {
         setQuizData(null)
     }
 
+    const handleCategory = (event) => {
+        setCategory(event.target.value);
+    };
+
+    const handleDifficulty = (event) => {
+        setDifficulty(event.target.value);
+    };
+
+    const handleQuizType = (event) => {
+        setQuizType(event.target.value);
+    };
+
     return (
         <>
             {!quizData && !loading &&
-                <>
-                    <h1>Let's get started!</h1>
-                    <form onSubmit={formHandler}>
-                        <div>
-                            <label htmlFor="numberOfQuestions">Number of Questions:</label>
-                            <input type="number" id="numberOfQuestions" name="number" defaultValue="10" max="30" />
-                        </div>
-                        <div>
-                            <select name="category" id="category">
-                                {categories.map(category => (
-                                    <option value={category.urlID} key={category.urlID}>{category.name}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div>
-                            <select name="difficulty" id="difficulty">
-                                <option value="">Any difficulty</option>
-                                <option value="easy">Easy</option>
-                                <option value="medium">Medium</option>
-                                <option value="hard">Hard</option>
-                            </select>
-                        </div>
-                        <div>
-                            <select name="type" id="type">
-                                <option value="">Any type</option>
-                                <option value="multiple">Multiple Choice</option>
-                                <option value="boolean">True/False</option>
-                            </select>
-                        </div>
-                        <div>
-                            <button type="submit">Generate Quiz!</button>
-                        </div>
-                    </form>
-                    {error && <p>{error}</p>}
-                </>
+                <Container maxWidth="xl">
+                    <Stack direction="row" flexWrap="wrap-reverse" gap={4}>
+                        <Paper elevation={3}>
+                            <Box p={4}>
+                                <Typography variant="h3" component="h2" gutterBottom>
+                                    Let's get started
+                                </Typography>
+                                <form onSubmit={formHandler}>
+                                    <Stack spacing={3}>
+                                        <TextField type="number" name="number" inputProps={{ min: 1, max: 30 }} defaultValue={10} label="Number of Questions" fullWidth />
+                                        <FormControl fullWidth>
+                                            <InputLabel id="category">Category</InputLabel>
+                                            <Select
+                                                labelId="category"
+                                                id="category"
+                                                value={category}
+                                                label="category"
+                                                onChange={handleCategory}
+                                            >
+                                                {categories.map(category => (
+                                                    <MenuItem value={category.id} key={category.id}>{category.name}</MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+                                        <FormControl fullWidth>
+                                            <InputLabel id="difficulty">Difficulty</InputLabel>
+                                            <Select
+                                                labelId="difficulty"
+                                                id="difficulty"
+                                                value={difficulty}
+                                                label="Difficulty"
+                                                onChange={handleDifficulty}
+                                            >
+                                                <MenuItem value={""}>Any difficulty</MenuItem>
+                                                <MenuItem value={"easy"}>Easy</MenuItem>
+                                                <MenuItem value={"medium"}>Medium</MenuItem>
+                                                <MenuItem value={"hard"}>Hard</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                        <FormControl fullWidth>
+                                            <InputLabel id="type">Type</InputLabel>
+                                            <Select
+                                                labelId="type"
+                                                id="type"
+                                                value={quizType}
+                                                label="type"
+                                                onChange={handleQuizType}
+                                            >
+                                                <MenuItem value={""}>Any type</MenuItem>
+                                                <MenuItem value={"multiple"}>Multiple Choice</MenuItem>
+                                                <MenuItem value={"boolean"}>True / False</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                        <Button variant="contained" type="submit" fullWidth>
+                                            Start Quiz
+                                        </Button>
+                                        {error && <Alert severity="error">{error}</Alert>}
+                                    </Stack>
+                                </form>
+                            </Box>
+                        </Paper>
+                        <Box pt={3} justifyContent="center">
+                            <Typography variant="h3" component="h2" gutterBottom>
+                                other side
+                            </Typography>
+                        </Box>
+                    </Stack>
+                </Container>
             }
-            {loading &&
+            {
+                loading &&
                 <Box sx={{ display: 'flex' }}>
                     <CircularProgress />
                 </Box>
             }
-            {quizData &&
+            {
+                quizData &&
                 <Quiz quizData={quizData} reset={reset} />
             }
         </>
