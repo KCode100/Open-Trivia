@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { categories } from "../data/categories";
 import Quiz from "./Quiz";
+import Loading from "./Loading"
 
 // material ui
-import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
-import { CardContent, Container, Stack } from "@mui/material";
+import { Container, Stack } from "@mui/material";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -15,6 +15,7 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import * as React from 'react';
 
 const Form = () => {
     const [numberOfQuestions, setNumberOfQuestions] = useState(null)
@@ -84,85 +85,71 @@ const Form = () => {
     return (
         <>
             {!quizData && !loading &&
-                <Container maxWidth="xl">
-                    <Stack direction="row" flexWrap="wrap-reverse" gap={4}>
-                        <Paper elevation={3}>
-                            <Box p={4}>
-                                <Typography variant="h3" component="h2" gutterBottom>
-                                    Let's get started
-                                </Typography>
-                                <form onSubmit={formHandler}>
-                                    <Stack spacing={3}>
-                                        <TextField type="number" name="number" inputProps={{ min: 1, max: 30 }} defaultValue={10} label="Number of Questions" fullWidth />
-                                        <FormControl fullWidth>
-                                            <InputLabel id="category">Category</InputLabel>
-                                            <Select
-                                                labelId="category"
-                                                id="category"
-                                                value={category}
-                                                label="category"
-                                                onChange={handleCategory}
-                                            >
-                                                {categories.map(category => (
-                                                    <MenuItem value={category.id} key={category.id}>{category.name}</MenuItem>
-                                                ))}
-                                            </Select>
-                                        </FormControl>
-                                        <FormControl fullWidth>
-                                            <InputLabel id="difficulty">Difficulty</InputLabel>
-                                            <Select
-                                                labelId="difficulty"
-                                                id="difficulty"
-                                                value={difficulty}
-                                                label="Difficulty"
-                                                onChange={handleDifficulty}
-                                            >
-                                                <MenuItem value={""}>Any difficulty</MenuItem>
-                                                <MenuItem value={"easy"}>Easy</MenuItem>
-                                                <MenuItem value={"medium"}>Medium</MenuItem>
-                                                <MenuItem value={"hard"}>Hard</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                        <FormControl fullWidth>
-                                            <InputLabel id="type">Type</InputLabel>
-                                            <Select
-                                                labelId="type"
-                                                id="type"
-                                                value={quizType}
-                                                label="type"
-                                                onChange={handleQuizType}
-                                            >
-                                                <MenuItem value={""}>Any type</MenuItem>
-                                                <MenuItem value={"multiple"}>Multiple Choice</MenuItem>
-                                                <MenuItem value={"boolean"}>True / False</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                        <Button variant="contained" type="submit" fullWidth>
-                                            Start Quiz
-                                        </Button>
-                                        {error && <Alert severity="error">{error}</Alert>}
-                                    </Stack>
-                                </form>
-                            </Box>
-                        </Paper>
-                        <Box pt={3} justifyContent="center">
+                <Container maxWidth="md">
+                    {/* <Stack direction="row" flexWrap="wrap-reverse" gap={4}> */}
+                    <Paper elevation={3}>
+                        <Box p={4}>
                             <Typography variant="h3" component="h2" gutterBottom>
-                                other side
+                                Let's get started
                             </Typography>
+                            <form onSubmit={formHandler}>
+                                <Stack spacing={3}>
+                                    <TextField type="number" name="number" inputProps={{ min: 1, max: 30 }} defaultValue={10} label="Number of Questions" fullWidth />
+                                    <FormControl fullWidth>
+                                        <InputLabel id="category">Category</InputLabel>
+                                        <Select
+                                            labelId="category"
+                                            id="category"
+                                            value={category}
+                                            label="category"
+                                            onChange={handleCategory}
+                                        >
+                                            {categories.map(category => (
+                                                <MenuItem value={category.id} key={category.id}>{category.name}</MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                    <FormControl fullWidth>
+                                        <InputLabel id="difficulty">Difficulty</InputLabel>
+                                        <Select
+                                            labelId="difficulty"
+                                            id="difficulty"
+                                            value={difficulty}
+                                            label="Difficulty"
+                                            onChange={handleDifficulty}
+                                        >
+                                            <MenuItem value={""}>Any difficulty</MenuItem>
+                                            <MenuItem value={"easy"}>Easy</MenuItem>
+                                            <MenuItem value={"medium"}>Medium</MenuItem>
+                                            <MenuItem value={"hard"}>Hard</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                    <FormControl fullWidth>
+                                        <InputLabel id="type">Type</InputLabel>
+                                        <Select
+                                            labelId="type"
+                                            id="type"
+                                            value={quizType}
+                                            label="type"
+                                            onChange={handleQuizType}
+                                        >
+                                            <MenuItem value={""}>Any type</MenuItem>
+                                            <MenuItem value={"multiple"}>Multiple Choice</MenuItem>
+                                            <MenuItem value={"boolean"}>True / False</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                    <Button variant="contained" size="large" type="submit" fullWidth>
+                                        Start Quiz
+                                    </Button>
+                                    {error && <Alert severity="error">{error}</Alert>}
+                                </Stack>
+                            </form>
                         </Box>
-                    </Stack>
+                    </Paper>
                 </Container>
             }
-            {
-                loading &&
-                <Box sx={{ display: 'flex' }}>
-                    <CircularProgress />
-                </Box>
-            }
-            {
-                quizData &&
-                <Quiz quizData={quizData} reset={reset} />
-            }
+            {loading && <Loading />}
+            {quizData && <Quiz quizData={quizData} reset={reset} />}
         </>
     );
 }
