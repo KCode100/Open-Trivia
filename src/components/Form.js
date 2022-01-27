@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { categories } from "../data/categories";
 import Quiz from "./Quiz";
 import SkeletonLoader from "./SkeletonLoader";
+
+import { motion, AnimatePresence } from 'framer-motion'
+
 // material ui
 import {
     Container,
@@ -87,10 +90,16 @@ const Form = () => {
         <>
             {!quizData && !loading &&
                 <div className="form-container">
-                    <Container className="form" maxWidth="xs" sx={{
-                        marginRight: { xs: "auto", md: "65%" },
-                    }}>
-                        {/* <Stack direction="row" flexWrap="wrap-reverse" gap={4}> */}
+                    <Container
+                        component={motion.div}
+                        initial={{ scale: .5 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: "spring", stiffness: 150 }}
+                        className="form"
+                        maxWidth="xs"
+                        sx={{
+                            marginRight: { xs: "auto", md: "65%" },
+                        }}>
                         <Paper elevation={3}>
                             <Box p={4}>
                                 <Typography variant="h3" component="h1" gutterBottom>

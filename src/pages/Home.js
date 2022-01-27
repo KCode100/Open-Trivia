@@ -13,6 +13,7 @@ const Home = () => {
             },
         },
     });
+    
     return (
         <ThemeProvider theme={theme}>
             <div className="home-banner">

@@ -1,20 +1,31 @@
 import Button from '@mui/material/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CountUp from 'react-countup';
 
 const GameOver = ({ score, length, reset }) => {
     const percentage = (score / length) * 100
-    const [displayCelebration, setDisplayCelebration] = useState(false)
+    const [positiveReaction, setPositiveReaction] = useState(false)
+    const [negativeReaction, setNegativeReaction] = useState(false)
+
+    useEffect(() => {
+        percentage < 10 ? setNegativeReaction(true) : setPositiveReaction(true)
+    })
 
     return (
         <div className="game-over">
-            {displayCelebration &&
-                <div class="pyro">
-                    <div class="before"></div>
-                    <div class="after"></div>
-                </div>
+            {positiveReaction &&
+                <>
+                    <div className="reaction__img reaction__img--positive"></div>
+                    <div className="pyro">
+                        <div className="before"></div>
+                        <div className="after"></div>
+                    </div>
+                </>
             }
-            <CountUp start={0} end={percentage} delay={0} onEnd={() => setDisplayCelebration(true)}>
+            {negativeReaction &&
+                <div className="reaction__img reaction__img--negative"></div>
+            }
+            <CountUp start={0} end={percentage} delay={0}>
                 {({ countUpRef }) => (
                     <div className='score'>
                         <span ref={countUpRef} /><span>%</span>
@@ -22,7 +33,7 @@ const GameOver = ({ score, length, reset }) => {
                 )}
             </CountUp>
             <Button variant="outlined" size="large" onClick={reset}>Play again</Button>
-        </div >
+        </div>
     );
 }
 

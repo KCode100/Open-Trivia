@@ -6,6 +6,9 @@ import Typography from '@mui/material/Typography';
 import GameOver from "./GameOver";
 import Alert from "./Alert";
 
+import { motion } from 'framer-motion'
+
+
 const Quiz = ({ quizData, reset }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0)
     const [score, setScore] = useState(0)
@@ -43,12 +46,24 @@ const Quiz = ({ quizData, reset }) => {
                             </Grid>
                         </Grid>
                         <LinearProgress variant="determinate" value={percentage} sx={{ marginBottom: 4 }} />
-                        <Typography pt={2} variant="h4" component="h2">
+                        <Typography
+                            pt={2}
+                            variant="h4">
                             <span dangerouslySetInnerHTML={{ __html: quizData[currentQuestion].question }} />
                         </Typography>
-                        <Stack sx={{ paddingTop: { xs: 4, md: 8 } }} spacing={{ xs: 1, sm: 2, md: 4 }} direction={{ xs: 'column', sm: 'row' }}>
-                            {quizData[currentQuestion].choices.map(choice => (
-                                <Button variant="contained" size="large" onClick={() => answerHandler(choice)} key={choice}>
+                        <Stack
+                            sx={{ paddingTop: { xs: 4, md: 8 } }}
+                            spacing={{ xs: 1, sm: 2, md: 4 }}
+                            direction={{ xs: 'column', sm: 'row' }}>
+                            {quizData[currentQuestion].choices.map((choice, i) => (
+                                <Button
+                                    component={motion.button}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: i * 0.1, type: "spring" }}
+                                    variant="contained"
+                                    size="large"
+                                    onClick={() => answerHandler(choice)} key={choice}>
                                     <span dangerouslySetInnerHTML={{ __html: choice }} />
                                 </Button>
                             ))}
