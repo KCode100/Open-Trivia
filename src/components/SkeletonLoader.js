@@ -1,10 +1,10 @@
-import { Container, Grid, Stack } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import Skeleton from '@mui/material/Skeleton';
 
-const Loading = () => {
+const SkeletonLoader = () => {
     return (
-        <Container maxWidth="lg">
-            <Grid container spacing={2} pb={4}>
+        <Container maxWidth="lg" sx={{ paddingTop: "60px" }}>
+            <Grid container spacing={2} pb={2}>
                 <Grid item item xs={9} md={7}>
                     <Skeleton animation="wave" variant="text" height={40} />
                 </Grid>
@@ -21,9 +21,11 @@ const Loading = () => {
                 sx={{
                     height: {
                         xs: 160,
-                        md: 80
-                    }
-                }} pt={2} />
+                        md: 100
+                    },
+                    marginTop: 4,
+                    marginBottom: 4
+                }} />
             <Grid container spacing={1}>
                 <Grid item item xs={12} md={4}>
                     <Skeleton animation="wave" variant="text" height={70} />
@@ -35,8 +37,9 @@ const Loading = () => {
                     <Skeleton animation="wave" variant="text" height={70} />
                 </Grid>
             </Grid>
+            <Skeleton animation="wave" variant="text" width={100} height={70} />
         </Container>
     );
 }
 
-export default Loading;
+export default SkeletonLoader;
