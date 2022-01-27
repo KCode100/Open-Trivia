@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# React / Open Trivia API / Material UI / Framer Motion
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
