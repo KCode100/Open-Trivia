@@ -3,7 +3,8 @@ import Skeleton from '@mui/material/Skeleton';
 
 const SkeletonLoader = () => {
     return (
-        <Container maxWidth="lg" sx={{ paddingTop: "60px" }}>
+        <Container
+            sx={{ paddingTop: "60px" }}>
             <Grid container spacing={2} pb={2}>
                 <Grid item item xs={9} md={7}>
                     <Skeleton animation="wave" variant="text" height={40} />

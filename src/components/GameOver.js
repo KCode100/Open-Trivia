@@ -1,5 +1,5 @@
-import Button from '@mui/material/Button';
 import { useEffect, useState } from 'react';
+import Button from '@mui/material/Button';
 import CountUp from 'react-countup';
 
 const GameOver = ({ scoreResult, reset }) => {

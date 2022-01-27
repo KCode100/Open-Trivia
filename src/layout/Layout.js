@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import DialMenu from "./DialMenu";
 
@@ -6,21 +6,18 @@ import DialMenu from "./DialMenu";
 import Container from '@mui/material/Container';
 import { Typography } from "@mui/material";
 
-
 const Layout = () => {
-
-
     return (
         <>
             <Container maxWidth="xl">
                 <DialMenu />
-                <Link to='/'>
-                    <Typography variant="h4" component={"div"} sx={{ fontWeight: 700, margin: "21px" }}>
-                        Kwizz
-                    </Typography>
-                </Link>
-                <main className="main"><Outlet /></main>
+                <Typography variant="h4" component={"div"} sx={{ fontWeight: 700, margin: { xs: "20px", md: "40px" } }}>
+                    <a href="mailto:kivi.webdev@gmail.com" target="_blank" rel="noreferrer">
+                        Get in touch
+                    </a>
+                </Typography>
             </Container>
+            <main className="main"><Outlet /></main>
             <Footer />
         </>
     );

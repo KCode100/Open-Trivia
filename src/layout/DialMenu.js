@@ -3,7 +3,7 @@ import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import EmailIcon from '@mui/icons-material/Email';
+import LanguageIcon from '@mui/icons-material/Language';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
@@ -14,7 +14,7 @@ const DialMenu = () => {
 
     const actions = [
         { icon: <EmojiEventsIcon style={{ color: "#d274a9" }} />, name: 'High Scores', url: 'about' },
-        { icon: <EmailIcon style={{ color: "#d274a9" }} />, name: 'Email', url: 'mailto:kivi.webdev@gmail.com' },
+        { icon: <LanguageIcon style={{ color: "#d274a9" }} />, name: 'Portfolio', url: 'https://bykivi.com' },
         { icon: <LinkedInIcon style={{ color: "#d274a9" }} />, name: 'LinkedIn', url: 'https://www.linkedin.com/in/kivi-corn/' },
         { icon: <GitHubIcon style={{ color: "#d274a9" }} />, name: 'GitHub', url: 'https://github.com/KCode100/open-trivia-react-application' },
     ];

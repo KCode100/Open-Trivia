@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { categories } from "../data/categories";
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
+import ArrowDown from './UI/ArrowDown'
 
 // material ui
 import {
@@ -12,19 +13,16 @@ import {
     InputLabel,
     MenuItem,
     Paper,
-    Alert,
     Select,
     TextField,
     FormControl
 } from "@mui/material";
 
-const Form = ({ handleQuizData, handleLoading }) => {
+const Form = ({ handleQuizData, handleLoading, handleError }) => {
     const [numberOfQuestions, setNumberOfQuestions] = useState(null)
     const [category, setCategory] = useState("")
     const [difficulty, setDifficulty] = useState("")
     const [quizType, setQuizType] = useState("")
-    const [error, setError] = useState(null)
-    const [quizData, setQuizData] = useState(null)
     const [fieldsComplete, setFieldsComplete] = useState(false)
 
     // collect form data
@@ -37,15 +35,14 @@ const Form = ({ handleQuizData, handleLoading }) => {
 
     useEffect(() => {
         if (fieldsComplete) {
-            console.log('fields complete')
-            handleLoading()
             const getData = async () => {
                 try {
+                    handleLoading(true)
                     const fetchToken = await fetch('https://opentdb.com/api_token.php?command=request')
                     const token = await fetchToken.json()
                     const data = await fetch(`https://opentdb.com/api.php?category=${category}&amount=${numberOfQuestions}&difficulty=${difficulty}&type=${quizType}&token=${token.token}`)
                     const json = await data.json()
-                    // setLoading(false)
+                    handleLoading(false)
                     if (json.response_code !== 0) {
                         throw new Error("Invalid parameter or session token")
                     }
@@ -55,10 +52,9 @@ const Form = ({ handleQuizData, handleLoading }) => {
                         question.choices = combined.sort(() => Math.random() - 0.5)
                     })
                     handleQuizData(json.results)
-                    console.log(json)
                 } catch (err) {
-                    // setLoading(false)
-                    setError("Error, please try again later")
+                    handleLoading(false)
+                    handleError()
                     console.log(err)
                 }
             }
@@ -79,8 +75,9 @@ const Form = ({ handleQuizData, handleLoading }) => {
     };
 
     return (
-        <div className="form-container">
+        <Container maxWidth="xl" className="form-container" sx={{ padding: 0 }}>
             <Container
+                id="form"
                 component={motion.div}
                 initial={{ scale: .5 }}
                 animate={{ scale: 1 }}
@@ -144,13 +141,13 @@ const Form = ({ handleQuizData, handleLoading }) => {
                                 <Button variant="contained" size="large" type="submit" fullWidth>
                                     Start Quiz
                                 </Button>
-                                {error && <Alert severity="error">{error}</Alert>}
                             </Stack>
                         </form>
                     </Box>
                 </Paper>
             </Container>
-        </div>
+            <ArrowDown to="#why" color="secondary" />
+        </Container >
     );
 }
 

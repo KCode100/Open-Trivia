@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import LinearProgress from '@mui/material/LinearProgress';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+// COMPONENTS
 import Alert from "./Alert";
 
 const Quiz = ({ quizData, reset, handleGameOver }) => {
@@ -31,7 +32,9 @@ const Quiz = ({ quizData, reset, handleGameOver }) => {
     return (
         <>
             {currentQuestion < quizData.length &&
-                <Container maxWidth="lg" sx={{ paddingTop: { xs: "20px", md: "60px" } }}>
+                <Container
+                    maxWidth="lg"
+                    sx={{ paddingTop: { xs: "20px", md: "60px" } }}>
                     <Grid container spacing={{ xs: 2, md: 3 }} sx={{ paddingBottom: 2 }}>
                         <Grid item item xs={12} sm={7}>
                             <Typography variant="h6" component="div" gutterBottom>

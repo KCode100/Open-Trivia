@@ -1,0 +1,91 @@
+@use '../vars/colors';
+
+body {
+    margin:0;
+    padding:0;
+    background-color: $off-white !important;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    position: relative;
+    
+    &--white {
+        background-color: $white;
+    }
+
+    &--primary {
+        background-color: $primary;
+    }
+    
+    &--secondary {
+        background-color: $secondary;
+    }
+}
+
+footer {
+    z-index: 10;
+}
+
+.down-icon {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    font-size: 40px !important;
+    transform: translateX(-50%);
+}
+
+.section-why {
+    background-image: url('../../../public/couple.png');
+    background-repeat: no-repeat;
+    background-position: center left;
+    min-height: 100vh;
+    background-size: 700px;
+
+    &__content {
+        position: absolute;
+        left: 50%;
+        top: 15%;
+        
+        h2 {
+            font-weight: 500;
+            font-size: 45px;
+            color: $primary;
+        }
+    }
+}
+
+@media (max-width: 1130px) {
+    .section-why {
+        background-size: 250px;
+        background-position: bottom right;
+    
+        &__content {
+            transform: translateX(-50%);
+
+            h2 {
+                font-weight: 500;
+                font-size: 35px;
+                color: $primary;
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .section-why {
+        background-position: bottom right;
+
+        &__content {
+            text-align: center;
+
+            h2 {
+                font-size: 25px;
+            }
+        }
+    }
+}
