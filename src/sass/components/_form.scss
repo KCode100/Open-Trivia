@@ -1,0 +1,33 @@
+.form-container {
+    background-image: url('../../../public/images/friends.png');
+    background-size: 750px;
+    background-repeat: no-repeat;
+    background-position: 90% 0%;
+    min-height: 90vh;
+  }
+  
+.form {
+    padding: 120px 0;
+}
+
+@media (max-width: 1250px) {
+.form-container {
+    background-size: 600px;
+    background-position: top right;
+}
+
+.form {
+    padding: 20px;
+}
+
+}
+
+@media (max-width: 900px) {
+.form {
+    opacity: 0.92;
+}
+
+.form-container {
+    background-position: top center;
+}
+}

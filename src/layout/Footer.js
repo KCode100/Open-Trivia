@@ -23,7 +23,6 @@ const Footer = () => {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                minHeight: '100vh',
             }}
         >
             <CssBaseline />
@@ -35,7 +34,7 @@ const Footer = () => {
                     mt: 'auto',
                     backgroundColor: (theme) =>
                         theme.palette.mode === 'light'
-                            ? theme.palette.grey[200]
+                            ? theme.palette.grey[300]
                             : theme.palette.grey[800],
                 }}
             >
