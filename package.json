@@ -1,5 +1,6 @@
 {
   "name": "react-quiz",
+  "homepage": "https://bykivi.com/quiz",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
