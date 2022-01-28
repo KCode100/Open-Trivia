@@ -6,10 +6,11 @@ import Form from "../components/Form";
 import SkeletonLoader from "../components/SkeletonLoader";
 import Quiz from "../components/Quiz";
 import GameOver from "../components/GameOver";
+import Why from "../components/Why";
+import OpenTrivia from "../components/OpenTrivia";
 
 // MATERIAL UI
 import { Alert } from "@mui/material";
-import Why from "../components/Why";
 
 const Home = () => {
     const [loading, setLoading] = useState(false)
@@ -54,6 +55,7 @@ const Home = () => {
                         handleError={handleError}
                     />
                     <Why />
+                    <OpenTrivia />
                 </>
             }
             {error && <Alert severity="error">{error}</Alert>}

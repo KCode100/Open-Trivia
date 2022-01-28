@@ -1,0 +1,59 @@
+@use '../vars/colors';
+
+.section-open-trivia {
+    background-image: url('../../../public/question-mark.png');
+    background-repeat: no-repeat;
+    background-position: 90% center;
+    min-height: 100vh;
+    background-size: 400px;
+
+    &__content {
+        max-width: 500px;
+        position: absolute;
+        top: 15%;
+        left: 15px;
+
+        h2 {
+            font-weight: 500;
+            font-size: 45px;
+            color: $primary;
+        }
+
+        ul {
+            margin: 0;
+            padding: 10px;
+            list-style-type: none;
+
+            li {
+                font-size: 26px;
+                padding: 10px;
+                text-transform: capitalize;
+
+                &::before {
+                    content: "\2022";
+                    color: $secondary;
+                    font-weight: bold;
+                    display: inline-block; 
+                    width: 1em;
+                    margin-left: -1em;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1130px) {
+    .section-open-trivia {
+        background-size: 300px;
+    }
+}
+
+@media (max-width: 900px) {
+    .section-open-trivia {
+        background-position: center;
+    }
+
+    h2 {
+        text-align: center;
+    }
+}

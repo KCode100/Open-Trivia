@@ -19,14 +19,8 @@ const Why = () => {
                     </AnchorLink>
                 </div>
             </Container>
-            <ArrowDown to="#why" color="secondary" />
-            {/* <li>spread of categories</li>
-            <li>umlimited free use</li>
-            <li>4,000+ verified question</li>
-            <li>user-contributed trivia question database</li>
-            <li>great API documentation</li> */}
+            <ArrowDown to="#open-trivia" color="secondary" />
         </Container>
-
     );
 }
 

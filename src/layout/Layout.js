@@ -18,7 +18,7 @@ const Layout = () => {
                 </Typography>
             </Container>
             <main className="main"><Outlet /></main>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 }
