@@ -1,6 +1,5 @@
 {
   "name": "react-quiz",
-  "homepage": "https://kivicorn-trivia-game.vercel.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
