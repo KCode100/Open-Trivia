@@ -14,7 +14,7 @@ const DialMenu = () => {
 
     const actions = [
         { icon: <EmojiEventsIcon style={{ color: "#d274a9" }} />, name: 'High Scores', url: 'about' },
-        { icon: <LanguageIcon style={{ color: "#d274a9" }} />, name: 'Portfolio', url: 'https://bykivi.com' },
+        { icon: <LanguageIcon style={{ color: "#d274a9" }} />, name: 'Portfolio', url: 'https://kivicorn.com' },
         { icon: <LinkedInIcon style={{ color: "#d274a9" }} />, name: 'LinkedIn', url: 'https://www.linkedin.com/in/kivi-corn/' },
         { icon: <GitHubIcon style={{ color: "#d274a9" }} />, name: 'GitHub', url: 'https://github.com/KCode100/open-trivia-react-application' },
     ];

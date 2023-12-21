@@ -9,8 +9,8 @@ const Footer = () => {
         return (
             <Typography variant="body2" color="text.secondary">
                 {'Copyright © '}
-                <Link color="inherit" href="https://bykivi.com/">
-                    ByKivi
+                <Link color="inherit" href="https://kivicorn.com/">
+                    KiviCorn
                 </Link>{' '}
                 {new Date().getFullYear()}
                 {'.'}
