@@ -3,9 +3,9 @@
 .section-open-trivia {
     background-image: url('../../../public/images/question-mark.png');
     background-repeat: no-repeat;
-    background-position: 90% center;
+    background-position: 80% 40%;
     min-height: 100vh;
-    background-size: 400px;
+    background-size: 200px;
 
     &__content {
         max-width: 500px;
@@ -21,11 +21,11 @@
 
         ul {
             margin: 0;
-            padding: 10px;
+            padding: 10px 10px 40px;
             list-style-type: none;
 
             li {
-                font-size: 26px;
+                font-size: 18px;
                 padding: 10px;
                 text-transform: capitalize;
 

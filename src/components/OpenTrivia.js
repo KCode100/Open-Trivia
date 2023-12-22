@@ -1,7 +1,8 @@
-import { Container, Button } from "@mui/material";
+import { Container, Button, useTheme } from "@mui/material";
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 
 const OpenTrivia = () => {
+    const theme = useTheme()
     return (
         <Container id="open-trivia" maxWidth="lg" className="container section-open-trivia">
             <div className="section-open-trivia__content">
@@ -16,7 +17,7 @@ const OpenTrivia = () => {
                     <li>great API documentation</li>
                 </ul>
                 <AnchorLink href="#form" className="section-open-trivia__btn">
-                    <Button variant="outlined" size="large" type="submit" fullWidth>
+                    <Button variant="contained" size="large" type="submit" fullWidth>
                         Get started
                     </Button>
                 </AnchorLink>

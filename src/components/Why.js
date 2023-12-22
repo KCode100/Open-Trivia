@@ -13,7 +13,7 @@ const Why = () => {
                         <h2>Assess your knowledge!</h2>
                     </div>
                     <AnchorLink href="#form" className="section-why__btn">
-                        <Button variant="outlined" size="large" type="submit" fullWidth>
+                        <Button variant="contained" size="large" type="submit" fullWidth>
                             Get started
                         </Button>
                     </AnchorLink>
